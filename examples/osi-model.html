@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="ms">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model OSI · Daripada aplikasi ke kabel</title>
+<style>
+:root {
+  --paper: #e7efec;
+  --surface: #fff;
+  --ink: #142621;
+  --accent: #075e4c;
+  --line: #9aada7;
+  --heading: 750 clamp(2rem, 5vw, 4.7rem)/1.02 system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+:root { color-scheme: light; }
+body { margin: 0; min-height: 100dvh; background: var(--paper); color: var(--ink); font: 1rem/1.45 system-ui, sans-serif; }
+[hidden] { display: none !important; }
+a { color: var(--accent); overflow-wrap: anywhere; }
+.shell { width: min(100% - 2rem, 76rem); margin: auto; padding-block: clamp(1rem, 4vw, 4rem); }
+.slide { min-height: min(66vh, 37rem); padding: clamp(1rem, 4vw, 4rem); background: var(--surface); border-top: .5rem solid var(--accent); }
+h1, h2, p { margin: 0; }
+h1 { font: var(--heading); max-width: 24ch; overflow-wrap: anywhere; }
+.lead { font-size: clamp(1.1rem, 2.3vw, 1.65rem); max-width: 54ch; margin-top: 1rem; }
+.items { margin: 2rem 0 0; padding: 0; }
+.items > li { list-style: none; padding: .75rem 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.items h2 { font-size: 1.12rem; }
+.items p { max-width: 68ch; }
+.columns .items { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 1.5rem; }
+.sequence ol { counter-reset: step; }
+.sequence li { counter-increment: step; padding-left: 2.5rem; position: relative; }
+.sequence li::before { content: counter(step, decimal-leading-zero); color: var(--accent); position: absolute; left: 0; font-weight: 700; }
+.sources { margin: 1.25rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; list-style: none; font-size: .9rem; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; padding-top: 1rem; }
+button { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: .2rem; padding: .55rem .8rem; font: inherit; }
+button:not(:disabled) { cursor: pointer; }
+button:disabled { opacity: .5; }
+button:focus-visible, a:focus-visible { outline: .2rem solid var(--accent); outline-offset: .2rem; }
+output { padding: .3rem; font-variant-numeric: tabular-nums; }
+#presenter { margin-top: 1rem; padding: 1rem; border: 1px solid var(--line); background: var(--surface); }
+#presenter p { margin-top: .5rem; }
+#notes { white-space: pre-wrap; }
+
+</style>
+<body><div class="shell">
+<main id="deck">
+<section class="slide focus" id="slide-soalan" aria-labelledby="title-soalan">
+<h1 id="title-soalan" tabindex="-1">Bagaimana data sampai ke destinasi?</h1>
+<p class="lead">Model OSI membahagikan komunikasi rangkaian kepada tujuh lapisan supaya setiap fungsi lebih mudah difahami.</p>
+</section>
+<section class="slide sequence" id="slide-lapisan-atas" aria-labelledby="title-lapisan-atas" hidden>
+<h1 id="title-lapisan-atas" tabindex="-1">Lapisan 7 hingga 4</h1>
+<ol class="items"><li><h2>L7 · Application</h2><p>Menyediakan perkhidmatan komunikasi kepada aplikasi.</p></li><li><h2>L6 · Presentation</h2><p>Mengurus representasi dan format data.</p></li><li><h2>L5 · Session</h2><p>Mengurus sesi komunikasi.</p></li><li><h2>L4 · Transport</h2><p>Mengurus pemindahan data antara sistem hujung.</p></li></ol>
+</section>
+<section class="slide sequence" id="slide-lapisan-bawah" aria-labelledby="title-lapisan-bawah" hidden>
+<h1 id="title-lapisan-bawah" tabindex="-1">Lapisan 3 hingga 1</h1>
+<ol class="items"><li><h2>L3 · Network</h2><p>Mengurus penghantaran paket merentas rangkaian. IP ialah contoh.</p></li><li><h2>L2 · Data Link</h2><p>Mengurus penghantaran bingkai pada satu pautan. Ethernet ialah contoh lazim.</p></li><li><h2>L1 · Physical</h2><p>Menghantar bit sebagai isyarat melalui medium fizikal.</p></li></ol>
+</section>
+<section class="slide columns" id="slide-banding" aria-labelledby="title-banding" hidden>
+<h1 id="title-banding" tabindex="-1">Alamat IP dan alamat MAC</h1>
+<ul class="items"><li><h2>IP · Contoh L3</h2><p>Penghala menggunakan maklumat IP untuk menentukan laluan paket ke rangkaian destinasi.</p></li><li><h2>MAC · Contoh L2</h2><p>Alamat MAC destinasi pada bingkai Ethernet membantu menghantar bingkai pada pautan setempat.</p></li></ul>
+</section>
+<section class="slide focus" id="slide-semak" aria-labelledby="title-semak" hidden>
+<h1 id="title-semak" tabindex="-1">Uji kefahaman</h1>
+<p class="lead">Jika pautan Ethernet tidak aktif, lapisan manakah perlu disemak dahulu?</p>
+<ul class="sources" aria-label="Sumber"><li><a href="https://www.itu.int/rec/T-REC-X.200/en">Model rujukan OSI · ITU-T X.200</a></li></ul>
+</section>
+</main>
+<nav class="toolbar" aria-label="Navigasi slaid">
+<button id="prev" type="button">Sebelumnya</button>
+<output id="count" aria-live="polite"></output>
+<button id="next" type="button">Seterusnya</button>
+<button id="toggle" type="button" aria-controls="presenter" aria-expanded="false">Pembentang</button>
+</nav>
+<aside id="presenter" aria-labelledby="presenter-title" hidden>
+<h2 id="presenter-title">Nota pembentang</h2>
+<p id="notes"></p>
+<p><strong>Seterusnya</strong> <span id="upcoming"></span></p>
+<p><strong>Masa slaid</strong> <span id="planned"></span></p>
+<div class="toolbar">
+<output id="clock" aria-label="Masa berlalu" aria-live="off">00:00</output>
+<button id="timer" type="button">Mula</button>
+<button id="reset" type="button">Set semula</button>
+</div>
+</aside>
+</div>
+<script id="deck-data" type="application/json">[{"id": "soalan", "notes": "Mulakan dengan satu soalan. Apabila pelayar meminta halaman web, fungsi apa yang berlaku sebelum bit dihantar melalui kabel?", "seconds": 25}, {"id": "lapisan-atas", "notes": "Mulakan di L7 dan turun satu demi satu. Terangkan bahawa OSI ialah model rujukan dan pemetaan protokol sebenar boleh berbeza.", "seconds": 45}, {"id": "lapisan-bawah", "notes": "Bezakan paket merentas rangkaian, bingkai pada pautan dan bit yang dibawa oleh isyarat.", "seconds": 45}, {"id": "banding", "notes": "Guna contoh komputer yang menghantar paket kepada pelayan di rangkaian lain melalui penghala lalai.", "seconds": 40}, {"id": "semak", "notes": "Jawapan yang dijangka ialah L1. Semak sambungan fizikal dan status pautan, kemudian teruskan kepada semakan lapisan lain jika perlu.", "seconds": 25}]</script>
+<script>
+"use strict";
+
+const slides = [...document.querySelectorAll(".slide")];
+const byId = id => document.getElementById(id);
+const notes = JSON.parse(byId("deck-data").textContent);
+const panel = byId("presenter");
+let index = 0;
+let elapsed = 0;
+let startedAt = null;
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  return [minutes, seconds % 60].map(value => String(value).padStart(2, "0")).join(":");
+}
+
+function updateClock() {
+  const running = startedAt === null ? 0 : performance.now() - startedAt;
+  const current = Math.floor((elapsed + running) / 1000);
+  byId("clock").textContent = formatTime(current);
+}
+
+function show(nextIndex, focus = false) {
+  if (nextIndex < 0 || nextIndex >= slides.length) return;
+  slides[index].hidden = true;
+  index = nextIndex;
+  const slide = slides[index];
+  slide.hidden = false;
+  byId("count").textContent = `${index + 1} / ${slides.length}`;
+  byId("prev").disabled = index === 0;
+  byId("next").disabled = index === slides.length - 1;
+  byId("notes").textContent = notes[index].notes || "Tiada nota.";
+  byId("planned").textContent = notes[index].seconds ? formatTime(notes[index].seconds) : "—";
+  byId("upcoming").textContent = slides[index + 1]?.querySelector("h1").textContent || "Tamat";
+  if (focus) slide.querySelector("h1").focus();
+}
+
+byId("prev").onclick = () => show(index - 1, true);
+byId("next").onclick = () => show(index + 1, true);
+byId("toggle").onclick = () => {
+  panel.hidden = !panel.hidden;
+  byId("toggle").setAttribute("aria-expanded", String(!panel.hidden));
+};
+byId("timer").onclick = () => {
+  if (startedAt === null) {
+    startedAt = performance.now();
+    byId("timer").textContent = "Jeda";
+  } else {
+    elapsed += performance.now() - startedAt;
+    startedAt = null;
+    byId("timer").textContent = "Sambung";
+  }
+  updateClock();
+};
+byId("reset").onclick = () => {
+  elapsed = 0;
+  startedAt = null;
+  byId("timer").textContent = "Mula";
+  updateClock();
+};
+
+const keys = { ArrowLeft: () => index - 1, ArrowRight: () => index + 1,
+  Home: () => 0, End: () => slides.length - 1 };
+document.addEventListener("keydown", event => {
+  if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey ||
+      event.target.closest("input, textarea, select, [contenteditable]")) return;
+  if (!Object.hasOwn(keys, event.key)) return;
+  event.preventDefault();
+  show(keys[event.key](), true);
+});
+
+show(0);
+updateClock();
+setInterval(updateClock, 250);
+
+</script>
+</body>
+</html>

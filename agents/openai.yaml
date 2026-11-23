@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bina Dek Web"
+  short_description: "Bina slaid HTML dengan nota dan timer pembentang"
+  default_prompt: "Gunakan $bina-dek-web untuk menukar bahan saya kepada pembentangan HTML."

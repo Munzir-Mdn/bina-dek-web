@@ -1,0 +1,57 @@
+{
+  "title": "Model OSI · Daripada aplikasi ke kabel",
+  "lang": "ms",
+  "slides": [
+    {
+      "id": "soalan",
+      "title": "Bagaimana data sampai ke destinasi?",
+      "lead": "Model OSI membahagikan komunikasi rangkaian kepada tujuh lapisan supaya setiap fungsi lebih mudah difahami.",
+      "notes": "Mulakan dengan satu soalan. Apabila pelayar meminta halaman web, fungsi apa yang berlaku sebelum bit dihantar melalui kabel?",
+      "seconds": 25
+    },
+    {
+      "id": "lapisan-atas",
+      "title": "Lapisan 7 hingga 4",
+      "layout": "sequence",
+      "items": [
+        {"label": "L7 · Application", "text": "Menyediakan perkhidmatan komunikasi kepada aplikasi."},
+        {"label": "L6 · Presentation", "text": "Mengurus representasi dan format data."},
+        {"label": "L5 · Session", "text": "Mengurus sesi komunikasi."},
+        {"label": "L4 · Transport", "text": "Mengurus pemindahan data antara sistem hujung."}
+      ],
+      "notes": "Mulakan di L7 dan turun satu demi satu. Terangkan bahawa OSI ialah model rujukan dan pemetaan protokol sebenar boleh berbeza.",
+      "seconds": 45
+    },
+    {
+      "id": "lapisan-bawah",
+      "title": "Lapisan 3 hingga 1",
+      "layout": "sequence",
+      "items": [
+        {"label": "L3 · Network", "text": "Mengurus penghantaran paket merentas rangkaian. IP ialah contoh."},
+        {"label": "L2 · Data Link", "text": "Mengurus penghantaran bingkai pada satu pautan. Ethernet ialah contoh lazim."},
+        {"label": "L1 · Physical", "text": "Menghantar bit sebagai isyarat melalui medium fizikal."}
+      ],
+      "notes": "Bezakan paket merentas rangkaian, bingkai pada pautan dan bit yang dibawa oleh isyarat.",
+      "seconds": 45
+    },
+    {
+      "id": "banding",
+      "title": "Alamat IP dan alamat MAC",
+      "layout": "columns",
+      "items": [
+        {"label": "IP · Contoh L3", "text": "Penghala menggunakan maklumat IP untuk menentukan laluan paket ke rangkaian destinasi."},
+        {"label": "MAC · Contoh L2", "text": "Alamat MAC destinasi pada bingkai Ethernet membantu menghantar bingkai pada pautan setempat."}
+      ],
+      "notes": "Guna contoh komputer yang menghantar paket kepada pelayan di rangkaian lain melalui penghala lalai.",
+      "seconds": 40
+    },
+    {
+      "id": "semak",
+      "title": "Uji kefahaman",
+      "lead": "Jika pautan Ethernet tidak aktif, lapisan manakah perlu disemak dahulu?",
+      "notes": "Jawapan yang dijangka ialah L1. Semak sambungan fizikal dan status pautan, kemudian teruskan kepada semakan lapisan lain jika perlu.",
+      "seconds": 25,
+      "sources": [{"label": "Model rujukan OSI · ITU-T X.200", "url": "https://www.itu.int/rec/T-REC-X.200/en"}]
+    }
+  ]
+}
